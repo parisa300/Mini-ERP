@@ -1,0 +1,10 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/MiniERP.API/MiniERP.API.csproj" />
+    <Project Path="src/MiniERP.Application/MiniERP.Application.csproj" />
+    <Project Path="src/MiniERP.Blazor/MiniERP.Blazor.csproj" />
+    <Project Path="src/MiniERP.Domain/MiniERP.Domain.csproj" />
+    <Project Path="src/MiniERP.Infrastructure/MiniERP.Infrastructure.csproj" />
+    <Project Path="src/MiniERP.Shared/MiniERP.Shared.csproj" />
+  </Folder>
+</Solution>

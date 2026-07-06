@@ -1,0 +1,11 @@
+C:\project\MiniERP\src\MiniERP.Shared\bin\Debug\net10.0\MiniERP.Shared.deps.json
+C:\project\MiniERP\src\MiniERP.Shared\bin\Debug\net10.0\MiniERP.Shared.dll
+C:\project\MiniERP\src\MiniERP.Shared\bin\Debug\net10.0\MiniERP.Shared.pdb
+C:\project\MiniERP\src\MiniERP.Shared\obj\Debug\net10.0\MiniERP.Shared.GeneratedMSBuildEditorConfig.editorconfig
+C:\project\MiniERP\src\MiniERP.Shared\obj\Debug\net10.0\MiniERP.Shared.AssemblyInfoInputs.cache
+C:\project\MiniERP\src\MiniERP.Shared\obj\Debug\net10.0\MiniERP.Shared.AssemblyInfo.cs
+C:\project\MiniERP\src\MiniERP.Shared\obj\Debug\net10.0\MiniERP.Shared.csproj.CoreCompileInputs.cache
+C:\project\MiniERP\src\MiniERP.Shared\obj\Debug\net10.0\MiniERP.Shared.dll
+C:\project\MiniERP\src\MiniERP.Shared\obj\Debug\net10.0\refint\MiniERP.Shared.dll
+C:\project\MiniERP\src\MiniERP.Shared\obj\Debug\net10.0\MiniERP.Shared.pdb
+C:\project\MiniERP\src\MiniERP.Shared\obj\Debug\net10.0\ref\MiniERP.Shared.dll

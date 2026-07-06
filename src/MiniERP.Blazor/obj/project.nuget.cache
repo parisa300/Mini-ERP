@@ -1,0 +1,15 @@
+{
+  "version": 2,
+  "dgSpecHash": "9OKnhi8KyLA=",
+  "success": true,
+  "projectFilePath": "C:\\project\\MiniERP\\src\\MiniERP.Blazor\\MiniERP.Blazor.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\COMPUTER\\.nuget\\packages\\fluentvalidation\\12.1.1\\fluentvalidation.12.1.1.nupkg.sha512",
+    "C:\\Users\\COMPUTER\\.nuget\\packages\\fluentvalidation.dependencyinjectionextensions\\12.1.1\\fluentvalidation.dependencyinjectionextensions.12.1.1.nupkg.sha512",
+    "C:\\Users\\COMPUTER\\.nuget\\packages\\microsoft.aspnetcore.app.internal.assets\\10.0.8\\microsoft.aspnetcore.app.internal.assets.10.0.8.nupkg.sha512",
+    "C:\\Users\\COMPUTER\\.nuget\\packages\\microsoft.entityframeworkcore\\10.0.9\\microsoft.entityframeworkcore.10.0.9.nupkg.sha512",
+    "C:\\Users\\COMPUTER\\.nuget\\packages\\microsoft.entityframeworkcore.abstractions\\10.0.9\\microsoft.entityframeworkcore.abstractions.10.0.9.nupkg.sha512",
+    "C:\\Users\\COMPUTER\\.nuget\\packages\\microsoft.entityframeworkcore.analyzers\\10.0.9\\microsoft.entityframeworkcore.analyzers.10.0.9.nupkg.sha512"
+  ],
+  "logs": []
+}
