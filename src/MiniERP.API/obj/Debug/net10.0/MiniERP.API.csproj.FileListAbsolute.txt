@@ -170,3 +170,13 @@ C:\project\MiniERP\src\MiniERP.API\obj\Debug\net10.0\refint\MiniERP.API.dll
 C:\project\MiniERP\src\MiniERP.API\obj\Debug\net10.0\MiniERP.API.pdb
 C:\project\MiniERP\src\MiniERP.API\obj\Debug\net10.0\MiniERP.API.genruntimeconfig.cache
 C:\project\MiniERP\src\MiniERP.API\obj\Debug\net10.0\ref\MiniERP.API.dll
+C:\project\MiniERP\src\MiniERP.API\obj\Debug\net10.0\MiniERP.API.sourcelink.json
+C:\project\MiniERP\src\MiniERP.API\bin\Debug\net10.0\Serilog.dll
+C:\project\MiniERP\src\MiniERP.API\bin\Debug\net10.0\Serilog.AspNetCore.dll
+C:\project\MiniERP\src\MiniERP.API\bin\Debug\net10.0\Serilog.Extensions.Hosting.dll
+C:\project\MiniERP\src\MiniERP.API\bin\Debug\net10.0\Serilog.Extensions.Logging.dll
+C:\project\MiniERP\src\MiniERP.API\bin\Debug\net10.0\Serilog.Formatting.Compact.dll
+C:\project\MiniERP\src\MiniERP.API\bin\Debug\net10.0\Serilog.Settings.Configuration.dll
+C:\project\MiniERP\src\MiniERP.API\bin\Debug\net10.0\Serilog.Sinks.Console.dll
+C:\project\MiniERP\src\MiniERP.API\bin\Debug\net10.0\Serilog.Sinks.Debug.dll
+C:\project\MiniERP\src\MiniERP.API\bin\Debug\net10.0\Serilog.Sinks.File.dll

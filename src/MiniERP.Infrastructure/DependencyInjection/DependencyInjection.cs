@@ -8,6 +8,8 @@ using MiniERP.Application.Common.Security;
 using MiniERP.Infrastructure.Security;
 using MiniERP.Infrastructure.Services;
 using MiniERP.Application.Features.Inventory.Transfer;
+using MiniERP.Infrastructure.Logging;
+using MiniERP.Application.Common.Interfaces.Security;
 namespace MiniERP.Infrastructure.DependencyInjection;
 
 public static class DependencyInjection
@@ -27,6 +29,8 @@ public static class DependencyInjection
     services.AddScoped<IJwtTokenGenerator, JwtTokenGenerator>();
     services.AddScoped<IInventoryTransactionWriter, InventoryTransactionWriter>();
  //   services.AddScoped<IInventoryTransferService, InventoryTransferService>();
+   services.AddScoped(typeof(IApplicationLogger<>), typeof(ApplicationLogger<>));
+   services.AddScoped<IRefreshTokenGenerator, RefreshTokenGenerator>();
 
         return services;
     }

@@ -1,80 +1,32 @@
-
-// using MiniERP.Infrastructure.DependencyInjection;
-// using MiniERP.API.Endpoints.Categories;
-// using MiniERP.API.Middlewares;
-// using MiniERP.Application.Features.Products.Create;
-// using MiniERP.API.Endpoints.Products;
-// using MiniERP.Application;
-// using FluentValidation;
-// using Microsoft.AspNetCore.Authentication.JwtBearer;
-// using Microsoft.IdentityModel.Tokens;
-// using System.Text;
-// using MiniERP.API.Endpoints.Auth;
-// var builder = WebApplication.CreateBuilder(args);
-
-// // Add services
-// builder.Services.AddEndpointsApiExplorer();
-// builder.Services.AddSwaggerGen();
-// builder.Services.AddApplication();
-// builder.Services.AddInfrastructure(builder.Configuration);
-// // builder.Services.AddScoped<CreateCategoryHandler>();
-// // builder.Services.AddScoped<GetAllCategoriesHandler>();
-// // builder.Services.AddScoped<GetCategoryByIdHandler>();
-// // builder.Services.AddScoped<UpdateCategoryHandler>();
-// // builder.Services.AddScoped<DeleteCategoryHandler>();
-// // builder.Services.AddScoped<CreateProductHandler>();
-// // builder.Services.AddScoped<GetAllProductsHandler>();
-// // builder.Services.AddScoped<GetProductByIdHandler>();
-// // builder.Services.AddScoped<UpdateProductHandler>();
-// // builder.Services.AddScoped<DeleteProductHandler>();
-
-// var provider = builder.Services.BuildServiceProvider();
-
-// var validator = provider.GetService<IValidator<CreateProductCommand>>();
-
-// Console.WriteLine(validator == null ? "Validator NOT Found" : "Validator Found");
-// var app = builder.Build();
-
-// if (app.Environment.IsDevelopment())
-// {
-//     app.UseSwagger();
-//     app.UseSwaggerUI();
-// }
-// app.UseGlobalException();
-// app.UseHttpsRedirection();
-
-// app.MapGet("/", () => "Mini ERP API is running.");
-// app.MapCategoryEndpoints();
-// app.MapGetAllCategoriesEndpoint();
-// app.MapGetCategoryByIdEndpoint();
-// app.MapUpdateCategoryEndpoint();
-// app.MapDeleteCategoryEndpoint();
-// app.MapCreateProductEndpoint();
-// app.MapGetAllProductsEndpoint();
-// app.MapGetProductByIdEndpoint();
-// app.MapUpdateProductEndpoint();
-// app.MapDeleteProductEndpoint();
-// app.MapRegisterEndpoint();
-// app.MapLoginEndpoint();
-// app.Run();
-
 using System.Text;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.IdentityModel.Tokens;
 
+using Microsoft.IdentityModel.Tokens;
 using MiniERP.Application;
 using MiniERP.Infrastructure.DependencyInjection;
-
 using MiniERP.API.Middlewares;
-
 using MiniERP.API.Endpoints.Categories;
 using MiniERP.API.Endpoints.Products;
 using MiniERP.API.Endpoints.Auth;
 using MiniERP.API.Endpoints.Customers;
 using MiniERP.API.Endpoints.Warehouses;
 using MiniERP.API.Endpoints.Inventory;
+using Serilog;
+using MiniERP.API.Endpoints.Suppliers;
+using MiniERP.API.Endpoints.PurchaseOrders;
 
+
+Log.Logger = new LoggerConfiguration()
+    .MinimumLevel.Information()
+    .WriteTo.Console()
+    .WriteTo.File(
+        "Logs/log-.txt",
+        rollingInterval: RollingInterval.Day,
+        retainedFileCountLimit: 30)
+    .CreateLogger();
 var builder = WebApplication.CreateBuilder(args);
+builder.Host.UseSerilog();
+builder.Services.AddHealthChecks();
 
 // ======================
 // Services
@@ -115,16 +67,12 @@ var app = builder.Build();
 // Middleware
 // ======================
 
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
-
+app.UseSwagger();
+app.UseSwaggerUI();
 app.UseGlobalException();
 
 app.UseHttpsRedirection();
-
+app.UseRequestLogging();
 app.UseAuthentication();
 
 app.UseAuthorization();
@@ -152,6 +100,7 @@ app.MapDeleteProductEndpoint();
 // Auth
 app.MapRegisterEndpoint();
 app.MapLoginEndpoint();
+app.MapRefreshTokenEndpoint();
 
 //Customer
 app.MapCreateCustomerEndpoint();
@@ -171,4 +120,18 @@ app.MapReceiveInventoryEndpoint();
 app.MapIssueInventoryEndpoint();
 app.MapGetInventoryTransactionsEndpoint();
 app.MapTransferInventoryEndpoint();
+app.MapGetInventoriesEndpoint();
+
+app.MapHealthChecks("/health");
+
+//Supplier
+app.MapCreateSupplierEndpoint();
+app.MapGetAllSuppliersEndpoint();
+app.MapGetSupplierByIdEndpoint();
+app.MapUpdateSupplierEndpoint();
+app.MapDeleteSupplierEndpoint();
+
+//purchase
+app.MapCreatePurchaseOrderEndpoint();
+app.MapReceivePurchaseOrderEndpoint();
 app.Run();

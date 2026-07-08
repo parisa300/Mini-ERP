@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Infrastructure;
 using MiniERP.Application.Common.Interfaces;
 using MiniERP.Domain.Entities;
 
@@ -20,6 +21,15 @@ public class AppDbContext
     public DbSet<Inventory> Inventories => Set<Inventory>();
     public DbSet<InventoryTransaction> InventoryTransactions
     => Set<InventoryTransaction>();
+    public DbSet<Supplier> Suppliers => Set<Supplier>();
+    public DbSet<PurchaseOrder> PurchaseOrders => Set<PurchaseOrder>();
+
+    public DbSet<PurchaseOrderItem> PurchaseOrderItems => Set<PurchaseOrderItem>();
+#pragma warning disable CS0114 // Member hides inherited member; missing override keyword
+    public DatabaseFacade Database => base.Database;
+#pragma warning restore CS0114 
+    public DbSet<RefreshToken> RefreshTokens =>
+    Set<RefreshToken>();
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);

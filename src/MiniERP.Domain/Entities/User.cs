@@ -45,4 +45,6 @@ public class User : AuditableEntity
         IsActive = true;
         SetUpdated();
     }
+    public ICollection<RefreshToken> RefreshTokens
+    { get; private set; } = new List<RefreshToken>();
 }

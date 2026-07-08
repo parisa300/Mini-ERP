@@ -13,15 +13,11 @@ public static class LoginEndpoint
             LoginHandler handler,
             CancellationToken cancellationToken) =>
         {
-            var token = await handler.Handle(
+            var response = await handler.Handle(
                 command,
                 cancellationToken);
 
-            return Results.Ok(new
-            {
-                accessToken = token
-            });
-
+            return Results.Ok(response);
         })
         .AddEndpointFilter<ValidationFilter<LoginCommand>>();
 

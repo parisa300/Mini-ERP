@@ -19,3 +19,4 @@ C:\project\MiniERP\src\MiniERP.Infrastructure\obj\Debug\net10.0\refint\MiniERP.I
 C:\project\MiniERP\src\MiniERP.Infrastructure\obj\Debug\net10.0\MiniERP.Infrastructure.pdb
 C:\project\MiniERP\src\MiniERP.Infrastructure\obj\Debug\net10.0\MiniERP.Infrastructure.genruntimeconfig.cache
 C:\project\MiniERP\src\MiniERP.Infrastructure\obj\Debug\net10.0\ref\MiniERP.Infrastructure.dll
+C:\project\MiniERP\src\MiniERP.Infrastructure\obj\Debug\net10.0\MiniERP.Infrastructure.sourcelink.json

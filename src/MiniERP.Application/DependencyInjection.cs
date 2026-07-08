@@ -1,6 +1,7 @@
 using FluentValidation;
 using Microsoft.Extensions.DependencyInjection;
 using MiniERP.Application.Features.Auth.Login;
+using MiniERP.Application.Features.Auth.RefreshToken;
 using MiniERP.Application.Features.Auth.Register;
 using MiniERP.Application.Features.Categories.Create;
 using MiniERP.Application.Features.Categories.Delete;
@@ -12,6 +13,7 @@ using MiniERP.Application.Features.Customers.Delete;
 using MiniERP.Application.Features.Customers.GetAll;
 using MiniERP.Application.Features.Customers.GetById;
 using MiniERP.Application.Features.Customers.Update;
+using MiniERP.Application.Features.Inventory.GetInventories;
 using MiniERP.Application.Features.Inventory.GetTransactions;
 using MiniERP.Application.Features.Inventory.Initialize;
 using MiniERP.Application.Features.Inventory.Issue;
@@ -22,6 +24,12 @@ using MiniERP.Application.Features.Products.Delete;
 using MiniERP.Application.Features.Products.GetAll;
 using MiniERP.Application.Features.Products.GetById;
 using MiniERP.Application.Features.Products.Update;
+using MiniERP.Application.Features.PurchaseOrders.Create;
+using MiniERP.Application.Features.Suppliers.Create;
+using MiniERP.Application.Features.Suppliers.Delete;
+using MiniERP.Application.Features.Suppliers.GetAll;
+using MiniERP.Application.Features.Suppliers.GetById;
+using MiniERP.Application.Features.Suppliers.Update;
 using MiniERP.Application.Features.Warehouses.Create;
 using MiniERP.Application.Features.Warehouses.Delete;
 using MiniERP.Application.Features.Warehouses.GetAll;
@@ -55,6 +63,7 @@ public static class DependencyInjection
         //User
         services.AddScoped<RegisterHandler>();
         services.AddScoped<LoginHandler>();
+        services.AddScoped<RefreshTokenHandler>();
         //Customer
         services.AddScoped<CreateCustomerHandler>();
         services.AddScoped<GetAllCustomersHandler>();
@@ -75,7 +84,17 @@ public static class DependencyInjection
         services.AddScoped<IssueInventoryHandler>();
         services.AddScoped<GetInventoryTransactionsHandler>();
         services.AddScoped<TransferInventoryHandler>();
-        
+        services.AddScoped<GetInventoriesHandler>();
+
+        //Supplier
+        services.AddScoped<CreateSupplierHandler>();
+        services.AddScoped<GetAllSuppliersHandler>();
+        services.AddScoped<GetSupplierByIdHandler>();
+        services.AddScoped<UpdateSupplierHandler>();
+        services.AddScoped<DeleteSupplierHandler>();
+
+        //purchase
+        services.AddScoped<CreatePurchaseOrderHandler>();
         return services;
     }
 }

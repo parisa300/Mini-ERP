@@ -14,6 +14,12 @@ public interface IApplicationDbContext
     DbSet<Inventory> Inventories { get; }
     DbSet<InventoryTransaction> InventoryTransactions { get; }
     DatabaseFacade Database { get; }
+    
+    DbSet<Supplier> Suppliers { get; }
+    DbSet<PurchaseOrder> PurchaseOrders { get; }
+
+    DbSet<PurchaseOrderItem> PurchaseOrderItems { get; }
+    DbSet<RefreshToken> RefreshTokens { get; }
 
     Task<int> SaveChangesAsync(CancellationToken cancellationToken = default);
 }
