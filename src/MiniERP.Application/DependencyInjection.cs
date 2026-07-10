@@ -13,6 +13,7 @@ using MiniERP.Application.Features.Customers.Delete;
 using MiniERP.Application.Features.Customers.GetAll;
 using MiniERP.Application.Features.Customers.GetById;
 using MiniERP.Application.Features.Customers.Update;
+using MiniERP.Application.Features.Dashboard;
 using MiniERP.Application.Features.Inventory.GetInventories;
 using MiniERP.Application.Features.Inventory.GetTransactions;
 using MiniERP.Application.Features.Inventory.Initialize;
@@ -100,6 +101,9 @@ public static class DependencyInjection
         //sales
         services.AddScoped<CreateSalesOrderHandler>();
         services.AddScoped<ConfirmSalesOrderHandler>();
+
+        //dashboard
+        services.AddScoped<GetDashboardHandler>();
         return services;
     }
 }

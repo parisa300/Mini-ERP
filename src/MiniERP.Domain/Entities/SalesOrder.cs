@@ -3,7 +3,7 @@ using MiniERP.Domain.Enums;
 
 namespace MiniERP.Domain.Entities;
 
-public class SalesOrder : BaseEntity
+public class SalesOrder : AuditableEntity
 {
     private readonly List<SalesOrderItem> _items = new();
 

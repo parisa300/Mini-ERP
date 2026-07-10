@@ -25,4 +25,7 @@ public class SalesOrderItem : BaseEntity
     public int Quantity { get; private set; }
 
     public decimal UnitPrice { get; private set; }
+
+
+    public SalesOrder SalesOrder { get; private set; } = null!;
 }

@@ -20,5 +20,10 @@ public class SalesOrderItemConfiguration
         builder.HasOne<Product>()
             .WithMany(x => x.SalesOrderItems)
             .HasForeignKey(x => x.ProductId);
+
+        builder
+            .HasOne(x => x.SalesOrder)
+            .WithMany(x => x.Items)
+            .HasForeignKey(x => x.SalesOrderId);
     }
 }
