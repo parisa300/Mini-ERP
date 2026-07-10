@@ -20,6 +20,10 @@ public interface IApplicationDbContext
 
     DbSet<PurchaseOrderItem> PurchaseOrderItems { get; }
     DbSet<RefreshToken> RefreshTokens { get; }
+    DbSet<SalesOrder> SalesOrders { get; }
+
+   DbSet<SalesOrderItem> SalesOrderItems { get; }
+   
 
     Task<int> SaveChangesAsync(CancellationToken cancellationToken = default);
 }

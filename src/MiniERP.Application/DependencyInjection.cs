@@ -25,6 +25,8 @@ using MiniERP.Application.Features.Products.GetAll;
 using MiniERP.Application.Features.Products.GetById;
 using MiniERP.Application.Features.Products.Update;
 using MiniERP.Application.Features.PurchaseOrders.Create;
+using MiniERP.Application.Features.SalesOrders.Confirm;
+using MiniERP.Application.Features.SalesOrders.Create;
 using MiniERP.Application.Features.Suppliers.Create;
 using MiniERP.Application.Features.Suppliers.Delete;
 using MiniERP.Application.Features.Suppliers.GetAll;
@@ -95,6 +97,9 @@ public static class DependencyInjection
 
         //purchase
         services.AddScoped<CreatePurchaseOrderHandler>();
+        //sales
+        services.AddScoped<CreateSalesOrderHandler>();
+        services.AddScoped<ConfirmSalesOrderHandler>();
         return services;
     }
 }

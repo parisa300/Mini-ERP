@@ -14,6 +14,7 @@ using MiniERP.API.Endpoints.Inventory;
 using Serilog;
 using MiniERP.API.Endpoints.Suppliers;
 using MiniERP.API.Endpoints.PurchaseOrders;
+using MiniERP.API.Endpoints.SalesOrders;
 
 
 Log.Logger = new LoggerConfiguration()
@@ -134,4 +135,7 @@ app.MapDeleteSupplierEndpoint();
 //purchase
 app.MapCreatePurchaseOrderEndpoint();
 app.MapReceivePurchaseOrderEndpoint();
+//sales
+app.MapCreateSalesOrderEndpoint();
+app.MapConfirmSalesOrderEndpoint();
 app.Run();

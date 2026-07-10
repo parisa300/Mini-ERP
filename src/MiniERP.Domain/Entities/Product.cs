@@ -59,4 +59,6 @@ public class Product : AuditableEntity
     }
     public ICollection<Inventory> Inventories { get; private set; }
     = new List<Inventory>();
+    public ICollection<SalesOrderItem> SalesOrderItems { 
+        get; private set; } = new List<SalesOrderItem>();
 }

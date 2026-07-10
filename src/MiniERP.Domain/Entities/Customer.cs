@@ -55,4 +55,5 @@ public class Customer : AuditableEntity
         IsActive = false;
         SetUpdated();
     }
+    public ICollection<SalesOrder> SalesOrders { get; private set; } = new List<SalesOrder>();
 }

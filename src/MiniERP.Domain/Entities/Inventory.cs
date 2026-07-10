@@ -1,6 +1,8 @@
 using MiniERP.Domain.Common;
+using MiniERP.Domain.Exceptions;
 
 namespace MiniERP.Domain.Entities;
+
 
 public class Inventory : AuditableEntity
 {
@@ -41,10 +43,10 @@ public class Inventory : AuditableEntity
     public void Decrease(int quantity)
     {
         if (quantity <= 0)
-            throw new Exception("Quantity must be greater than zero.");
+            throw new BusinessException("Quantity must be greater than zero.");
 
         if (Quantity < quantity)
-            throw new Exception("Insufficient inventory.");
+            throw new BusinessException("Insufficient inventory.");
 
         Quantity -= quantity;
 

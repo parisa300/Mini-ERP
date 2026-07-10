@@ -23,7 +23,9 @@ public class AppDbContext
     => Set<InventoryTransaction>();
     public DbSet<Supplier> Suppliers => Set<Supplier>();
     public DbSet<PurchaseOrder> PurchaseOrders => Set<PurchaseOrder>();
+    public DbSet<SalesOrder> SalesOrders => Set<SalesOrder>();
 
+    public DbSet<SalesOrderItem> SalesOrderItems => Set<SalesOrderItem>();
     public DbSet<PurchaseOrderItem> PurchaseOrderItems => Set<PurchaseOrderItem>();
 #pragma warning disable CS0114 // Member hides inherited member; missing override keyword
     public DatabaseFacade Database => base.Database;
