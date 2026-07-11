@@ -28,4 +28,5 @@ public class SalesOrderItem : BaseEntity
 
 
     public SalesOrder SalesOrder { get; private set; } = null!;
+    public Product Product { get; private set; } = null!;
 }

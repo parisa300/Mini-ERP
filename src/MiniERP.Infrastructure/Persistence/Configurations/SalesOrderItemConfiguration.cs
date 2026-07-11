@@ -25,5 +25,10 @@ public class SalesOrderItemConfiguration
             .HasOne(x => x.SalesOrder)
             .WithMany(x => x.Items)
             .HasForeignKey(x => x.SalesOrderId);
+        builder
+            .HasOne(x => x.Product)
+            .WithMany()
+            .HasForeignKey(x => x.ProductId)
+            .OnDelete(DeleteBehavior.Restrict);
     }
 }

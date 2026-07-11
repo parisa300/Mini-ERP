@@ -19,4 +19,12 @@ public class DashboardDto
     public decimal TodaySales { get; set; }
 
     public decimal TodayPurchases { get; set; }
+    public List<LowStockProductDto> LowStockProducts { get; set; }
+    = new();
+    public List<TopSellingProductDto> TopSellingProducts { get; set; }
+    = new();
+    public List<MonthlySalesDto> MonthlySales { get; set; }
+    = new();
+    public List<LowStockDto> LowStockAlerts { get; set; }
+    = new();
 }

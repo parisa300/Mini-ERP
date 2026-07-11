@@ -18,6 +18,71 @@ public class GetDashboardHandler
         CancellationToken cancellationToken)
     {
         var today = DateTime.UtcNow.Date;
+        var lowStockProducts =
+    await _context.Inventories
+        .Where(x => x.Quantity <= 5)
+        .Select(x => new LowStockProductDto
+        {
+            ProductId = x.ProductId,
+            ProductName = x.Product.Name,
+            Quantity = x.Quantity
+        })
+        .ToListAsync(cancellationToken);
+
+        var topSellingProducts =
+    await _context.SalesOrderItems
+        .Where(x => x.SalesOrder.Status == SalesOrderStatus.Confirmed)
+        .GroupBy(x => new
+        {
+            x.ProductId,
+            x.Product.Name
+        })
+        .Select(g => new TopSellingProductDto
+        {
+            ProductId = g.Key.ProductId,
+            ProductName = g.Key.Name,
+            TotalSold = g.Sum(x => x.Quantity)
+        })
+        .OrderByDescending(x => x.TotalSold)
+        .Take(5)
+        .ToListAsync(cancellationToken);
+var monthlySales =
+    await _context.SalesOrderItems
+        .Where(x => x.SalesOrder.Status == SalesOrderStatus.Confirmed)
+        .GroupBy(x => new
+        {
+            x.SalesOrder.CreatedAt.Year,
+            x.SalesOrder.CreatedAt.Month
+        })
+        .Select(g => new MonthlySalesDto
+        {
+            Year = g.Key.Year,
+            Month = g.Key.Month,
+
+            TotalAmount = g.Sum(x =>
+                x.Quantity * x.UnitPrice),
+
+            OrdersCount = g
+                .Select(x => x.SalesOrderId)
+                .Distinct()
+                .Count()
+        })
+        .OrderBy(x => x.Month)
+        .ToListAsync(cancellationToken);
+
+        var lowStockAlerts =
+    await _context.Inventories
+        .Where(x => x.Quantity <= 5)
+        .Select(x => new LowStockDto
+        {
+            ProductId = x.ProductId,
+            ProductName = x.Product.Name,
+            WarehouseName = x.Warehouse.Name,
+            Quantity = x.Quantity
+        })
+        .OrderBy(x => x.Quantity)
+        .ToListAsync(cancellationToken);
+
 
         return new DashboardDto
         {
@@ -67,7 +132,12 @@ public class GetDashboardHandler
             x.PurchaseOrder.Status == PurchaseOrderStatus.Received)
         .SumAsync(
             x => x.Quantity * x.UnitPrice,
-            cancellationToken)
+            cancellationToken),
+
+            LowStockProducts = lowStockProducts,
+            TopSellingProducts = topSellingProducts,
+            MonthlySales = monthlySales,
+            LowStockAlerts = lowStockAlerts,
         };
     }
 }
