@@ -16,6 +16,7 @@ using MiniERP.API.Endpoints.Suppliers;
 using MiniERP.API.Endpoints.PurchaseOrders;
 using MiniERP.API.Endpoints.SalesOrders;
 using MiniERP.API.Endpoints.Dashboard;
+using MiniERP.API.Endpoints.Reports;
 
 
 Log.Logger = new LoggerConfiguration()
@@ -141,4 +142,6 @@ app.MapCreateSalesOrderEndpoint();
 app.MapConfirmSalesOrderEndpoint();
 //Dashboard
 app.MapGetDashboardEndpoint();
+//Report
+app.MapGetSalesReportEndpoint();
 app.Run();

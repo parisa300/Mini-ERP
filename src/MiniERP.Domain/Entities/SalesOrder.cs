@@ -24,6 +24,9 @@ public class SalesOrder : AuditableEntity
 
     public SalesOrderStatus Status { get; private set; }
     public Guid WarehouseId { get; private set; }
+    public Customer Customer { get; private set; } = null!;
+
+    public Warehouse Warehouse { get; private set; } = null!;
 
     public IReadOnlyCollection<SalesOrderItem> Items => _items;
 

@@ -26,6 +26,7 @@ using MiniERP.Application.Features.Products.GetAll;
 using MiniERP.Application.Features.Products.GetById;
 using MiniERP.Application.Features.Products.Update;
 using MiniERP.Application.Features.PurchaseOrders.Create;
+using MiniERP.Application.Features.Reports.Sales;
 using MiniERP.Application.Features.SalesOrders.Confirm;
 using MiniERP.Application.Features.SalesOrders.Create;
 using MiniERP.Application.Features.Suppliers.Create;
@@ -104,6 +105,8 @@ public static class DependencyInjection
 
         //dashboard
         services.AddScoped<GetDashboardHandler>();
+        //Report
+        services.AddScoped<GetSalesReportHandler>();
         return services;
     }
 }

@@ -18,12 +18,12 @@ public class SalesOrderConfiguration : IEntityTypeConfiguration<SalesOrder>
             .HasForeignKey(x => x.SalesOrderId)
             .OnDelete(DeleteBehavior.Cascade);
 
-        builder.HasOne<Warehouse>()
-            .WithMany()
-            .HasForeignKey(x => x.WarehouseId);
+     builder.HasOne(x => x.Warehouse)
+    .WithMany()
+    .HasForeignKey(x => x.WarehouseId);
 
-        builder.HasOne<Customer>()
-            .WithMany(x => x.SalesOrders)
-            .HasForeignKey(x => x.CustomerId);
+builder.HasOne(x => x.Customer)
+    .WithMany(x => x.SalesOrders)
+    .HasForeignKey(x => x.CustomerId);
     }
 }
