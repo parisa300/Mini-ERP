@@ -1,0 +1,45 @@
+@using Microsoft.JSInterop
+@using MiniERP.Blazor.Models
+@rendermode InteractiveServer
+
+@inject IJSRuntime JS
+
+<div class="card p-4 shadow-sm">
+
+    <h5 class="mb-3">
+        Monthly Sales
+    </h5>
+
+    <div style="height:280px">
+
+        <canvas id="salesChart"></canvas>
+
+    </div>
+
+</div>
+
+@code {
+
+    [Parameter]
+    public List<MonthlySalesDto> MonthlySales { get; set; } = [];
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (MonthlySales.Count == 0)
+            return;
+
+        var labels = MonthlySales
+            .Select(x => $"{x.Year}/{x.Month:00}")
+            .ToArray();
+
+        var values = MonthlySales
+            .Select(x => (double)x.TotalAmount)
+            .ToArray();
+
+        await JS.InvokeVoidAsync(
+            "renderSalesChart",
+            "salesChart",
+            labels,
+            values);
+    }
+}

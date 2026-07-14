@@ -1,0 +1,142 @@
+@page "/products"
+@inject NavigationManager Navigation
+
+@using MiniERP.Blazor.Models
+@using MiniERP.Blazor.Services
+
+@inject ProductService ProductService
+
+<h2 class="mb-4">Products</h2>
+
+<div class="card shadow-sm">
+
+    <div class="card-header d-flex justify-content-between align-items-center">
+<a href="/products/create" class="btn btn-primary">
+
+    <i class="bi bi-plus-lg"></i>
+
+    Add Product
+
+</a>
+
+    <input class="form-control w-25"
+       placeholder="Search..."
+       @bind="search"
+       @bind:event="oninput" />
+       <p>Search: @search</p>
+   <button class="btn btn-outline-primary ms-2"
+        @onclick="LoadProducts">
+
+    <i class="bi bi-search"></i>
+
+    Search
+
+</button>
+
+    </div>
+
+    <div class="card-body">
+
+        <table class="table table-hover">
+
+            <thead>
+
+                <tr>
+
+                    <th>Name</th>
+
+                    <th>Category</th>
+
+                    <th>Price</th>
+
+                    <th>Stock</th>
+
+                </tr>
+
+            </thead>
+
+            <tbody>
+
+                @foreach (var item in result.Items)
+                {
+                    <tr>
+
+                        <td>@item.Name</td>
+
+                        <td>@item.CategoryName</td>
+
+                        <td>@item.Price</td>
+
+                        <td>@item.Stock</td>
+
+                    </tr>
+                }
+
+            </tbody>
+
+        </table>
+        <div class="d-flex justify-content-between align-items-center mt-3">
+
+    <button class="btn btn-outline-primary"
+            @onclick="PreviousPage"
+            disabled="@(currentPage == 1)">
+        ← Previous
+    </button>
+
+    <span>
+        Page @result.Page of @result.TotalPages
+    </span>
+
+    <button class="btn btn-outline-primary"
+            @onclick="NextPage"
+            disabled="@(currentPage == result.TotalPages)">
+        Next →
+    </button>
+
+</div>
+
+    </div>
+
+</div>
+
+@code{
+
+    private string search = "";
+    private int currentPage = 1;
+
+    private int pageSize = 10;
+    private PagedResult<ProductDto> result = new();
+
+    protected override async Task OnInitializedAsync()
+    {
+        await LoadProducts();
+    }
+
+ private async Task LoadProducts()
+{
+    result = await ProductService.GetProductsAsync(
+        currentPage,
+        pageSize,
+        search);
+}
+private async Task NextPage()
+{
+    if (currentPage >= result.TotalPages)
+        return;
+
+    currentPage++;
+
+    await LoadProducts();
+}
+
+private async Task PreviousPage()
+{
+    if (currentPage <= 1)
+        return;
+
+    currentPage--;
+
+    await LoadProducts();
+}
+
+}

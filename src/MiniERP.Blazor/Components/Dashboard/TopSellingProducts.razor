@@ -1,0 +1,70 @@
+@using MiniERP.Blazor.Models
+
+<div class="card shadow-sm h-100">
+
+    <div class="card-header bg-white">
+
+        <h5 class="mb-0">
+            🔥 Top Selling Products
+        </h5>
+
+    </div>
+
+    <div class="card-body">
+
+        @if (Products.Count == 0)
+        {
+            <p class="text-muted mb-0">
+                No sales yet.
+            </p>
+        }
+        else
+        {
+            <table class="table table-hover align-middle">
+
+                <thead>
+
+                    <tr>
+
+                        <th>Product</th>
+
+                        <th class="text-end">
+                            Sold
+                        </th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody>
+
+                    @foreach (var item in Products)
+                    {
+                        <tr>
+
+                            <td>
+                                @item.ProductName
+                            </td>
+
+                            <td class="text-end fw-bold">
+                                @item.TotalSold
+                            </td>
+
+                        </tr>
+                    }
+
+                </tbody>
+
+            </table>
+        }
+
+    </div>
+
+</div>
+
+@code {
+
+    [Parameter]
+    public List<TopSellingProductDto> Products { get; set; } = new();
+
+}
