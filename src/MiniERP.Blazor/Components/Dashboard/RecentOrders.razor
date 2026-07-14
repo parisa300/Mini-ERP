@@ -1,0 +1,98 @@
+@using MiniERP.Blazor.Models
+
+<div class="card shadow-sm mt-4">
+
+    <div class="card-header bg-white">
+
+        <h5 class="mb-0">
+            Recent Orders
+        </h5>
+
+    </div>
+
+    <div class="card-body p-0">
+
+        @if (Orders.Count == 0)
+        {
+            <div class="p-3 text-muted">
+                No orders found.
+            </div>
+        }
+        else
+        {
+            <table class="table table-hover mb-0">
+
+                <thead>
+
+                    <tr>
+
+                        <th>Customer</th>
+
+                        <th>Status</th>
+
+                        <th>Total</th>
+
+                        <th>Date</th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody>
+
+                    @foreach (var item in Orders)
+                    {
+                        <tr>
+
+                            <td>
+                                @item.CustomerName
+                            </td>
+
+                            <td>
+
+                                @if(item.Status=="Confirmed")
+                                {
+                                    <span class="badge bg-success">
+                                        Confirmed
+                                    </span>
+                                }
+                                else
+                                {
+                                    <span class="badge bg-warning text-dark">
+                                        Draft
+                                    </span>
+                                }
+
+                            </td>
+
+                            <td>
+
+                                @item.TotalAmount.ToString("N0")
+
+                            </td>
+
+                            <td>
+
+                                @item.CreatedAt.ToString("yyyy/MM/dd")
+
+                            </td>
+
+                        </tr>
+                    }
+
+                </tbody>
+
+            </table>
+        }
+
+    </div>
+
+</div>
+
+@code{
+
+    [Parameter]
+
+    public List<RecentOrderDto> Orders { get; set; } = [];
+
+}

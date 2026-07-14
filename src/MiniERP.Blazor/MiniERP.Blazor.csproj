@@ -5,6 +5,10 @@
     <ProjectReference Include="..\MiniERP.Shared\MiniERP.Shared.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Include="PSC.Blazor.Components.Chartjs" Version="8.0.8" />
+  </ItemGroup>
+
   <PropertyGroup>
     <TargetFramework>net10.0</TargetFramework>
     <Nullable>enable</Nullable>

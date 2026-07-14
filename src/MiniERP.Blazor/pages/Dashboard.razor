@@ -1,0 +1,91 @@
+@page "/"
+@using MiniERP.Blazor.Components.Dashboard
+@using MiniERP.Blazor.Services
+
+@using MiniERP.Blazor.Models
+@inject DashboardService DashboardService
+@code {
+
+    private DashboardDto? dashboard;
+
+    protected override async Task OnInitializedAsync()
+    {
+        dashboard = await DashboardService.GetDashboardAsync();
+    }
+
+}
+
+<div class="dashboard">
+
+    <div class="dashboard-header">
+
+        <div>
+
+            <h2>Dashboard</h2>
+
+            <p>Welcome back 👋</p>
+
+
+        </div>
+
+    </div>
+
+    <div class="summary-grid">
+
+<SummaryCard
+    Title="Today's Sales"
+    Value="@($"{dashboard?.TodaySales:N0}")"
+    Subtitle="Today's Revenue"
+    Icon="bi bi-cart3"/>
+
+<SummaryCard
+    Title="Today's Purchases"
+    Value="@($"{dashboard?.TodayPurchases:N0}")"
+    Subtitle="Today's Purchases"
+    Icon="bi bi-bag"/>
+
+<SummaryCard
+    Title="Products"
+    Value="@(dashboard?.TotalProducts.ToString() ?? "0")"
+    Subtitle="Registered Products"
+    Icon="bi bi-box-seam"/>
+
+<SummaryCard
+    Title="Customers"
+    Value="@(dashboard?.TotalCustomers.ToString() ?? "0")"
+    Subtitle="Registered Customers"
+    Icon="bi bi-people"/>
+
+    </div>
+<div class="row mt-4">
+
+    <div class="col-12">
+
+        <SalesChart
+            MonthlySales="dashboard?.MonthlySales ?? new()" />
+
+    </div>
+
+</div>
+
+<div class="row mt-3">
+
+    <div class="col-lg-6">
+
+        <TopSellingProducts
+            Products="dashboard?.TopSellingProducts ?? new()" />
+
+    </div>
+
+    <div class="col-lg-6">
+
+        <LowStockProducts
+            Products="dashboard?.LowStockAlerts ?? new()" />
+
+    </div>
+    <RecentOrders
+    Orders="dashboard?.RecentOrders ?? new()" />
+
+</div>
+
+</div>
