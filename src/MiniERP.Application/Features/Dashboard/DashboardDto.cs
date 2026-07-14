@@ -27,4 +27,5 @@ public class DashboardDto
     = new();
     public List<LowStockDto> LowStockAlerts { get; set; }
     = new();
+    public List<RecentOrderDto> RecentOrders { get; set; } = [];
 }

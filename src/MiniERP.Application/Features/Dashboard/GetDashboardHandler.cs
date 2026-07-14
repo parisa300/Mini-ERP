@@ -83,7 +83,20 @@ var monthlySales =
         .OrderBy(x => x.Quantity)
         .ToListAsync(cancellationToken);
 
-
+var recentOrders =
+    await _context.SalesOrders
+        .OrderByDescending(x => x.CreatedAt)
+        .Take(5)
+        .Select(x => new RecentOrderDto
+        {
+            Id = x.Id,
+            CustomerName = x.Customer.FullName,
+            TotalAmount = x.Items.Sum(i => i.Quantity * i.UnitPrice),
+            Status = x.Status.ToString(),
+            CreatedAt = x.CreatedAt
+        })
+        .ToListAsync(cancellationToken);
+      
         return new DashboardDto
         {
             TotalProducts =
@@ -138,6 +151,7 @@ var monthlySales =
             TopSellingProducts = topSellingProducts,
             MonthlySales = monthlySales,
             LowStockAlerts = lowStockAlerts,
+            RecentOrders = recentOrders,
         };
     }
 }

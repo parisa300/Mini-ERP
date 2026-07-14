@@ -1,6 +1,5 @@
 using System.Text;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
-
 using Microsoft.IdentityModel.Tokens;
 using MiniERP.Application;
 using MiniERP.Infrastructure.DependencyInjection;
@@ -63,6 +62,7 @@ builder.Services
     });
 
 builder.Services.AddAuthorization();
+
 
 var app = builder.Build();
 
