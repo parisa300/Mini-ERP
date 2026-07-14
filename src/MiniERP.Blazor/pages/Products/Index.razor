@@ -1,6 +1,7 @@
 @page "/products"
 @inject NavigationManager Navigation
-
+@using Microsoft.JSInterop
+@inject IJSRuntime JS
 @using MiniERP.Blazor.Models
 @using MiniERP.Blazor.Services
 
@@ -51,6 +52,8 @@
 
                     <th>Stock</th>
 
+                    <th>Actions</th>
+
                 </tr>
 
             </thead>
@@ -68,6 +71,21 @@
                         <td>@item.Price</td>
 
                         <td>@item.Stock</td>
+                        <td>
+                        <a class="btn btn-sm btn-warning"
+                        href="/products/edit/@item.Id">
+
+                        <i class="bi bi-pencil"></i>
+
+                        </a>
+                     <td>@item.Id</td>
+                       <button class="btn btn-danger btn-sm"
+                      @onclick="() => Delete(item.Id)">
+
+                     <i class="bi bi-trash"></i>
+
+                    </button>
+                        </td>
 
                     </tr>
                 }
@@ -135,6 +153,19 @@ private async Task PreviousPage()
         return;
 
     currentPage--;
+
+    await LoadProducts();
+}
+private async Task Delete(Guid id)
+{
+    Console.WriteLine($"Button ID = {id}");
+
+    var confirmed = await JS.InvokeAsync<bool>("confirm", "Delete this product?");
+
+    if (!confirmed)
+        return;
+
+    await ProductService.DeleteProductAsync(id);
 
     await LoadProducts();
 }

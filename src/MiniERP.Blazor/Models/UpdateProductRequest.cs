@@ -1,6 +1,4 @@
-namespace MiniERP.Blazor.Models;
-
-public class ProductDto
+public class UpdateProductRequest
 {
     public Guid Id { get; set; }
 
@@ -12,6 +10,5 @@ public class ProductDto
 
     public int Stock { get; set; }
 
-    public string CategoryName { get; set; } = "";
     public Guid CategoryId { get; set; }
 }

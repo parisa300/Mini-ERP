@@ -35,4 +35,25 @@ public async Task CreateProductAsync(CreateProductRequest request)
 
     response.EnsureSuccessStatusCode();
 }
+public async Task<ProductDto?> GetProductAsync(Guid id)
+{
+    return await _http.GetFromJsonAsync<ProductDto>($"products/{id}");
+}
+
+public async Task UpdateProductAsync(Guid id, UpdateProductRequest request)
+{
+    var response = await _http.PutAsJsonAsync($"products/{id}", request);
+
+    response.EnsureSuccessStatusCode();
+}
+public async Task DeleteProductAsync(Guid id)
+{
+    Console.WriteLine($"Deleting => {id}");
+
+    var response = await _http.DeleteAsync($"products/{id}");
+
+    Console.WriteLine(response.StatusCode);
+
+    response.EnsureSuccessStatusCode();
+}
 }
