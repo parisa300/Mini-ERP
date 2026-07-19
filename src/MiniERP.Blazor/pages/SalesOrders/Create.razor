@@ -1,0 +1,254 @@
+@page "/salesorders/create"
+@using Microsoft.AspNetCore.Components.Forms
+@using MiniERP.Blazor.Models
+@using MiniERP.Blazor.Services
+
+@inject CustomerService CustomerService
+@inject WarehouseService WarehouseService
+@inject ProductService ProductService
+@inject SalesOrderService SalesOrderService
+@inject NavigationManager Navigation
+
+<h3>Create Sales Order</h3>
+
+<div class="card shadow-sm">
+
+    <div class="card-body">
+
+        <div class="row">
+
+            <div class="col-md-6">
+
+                <label>Customer</label>
+
+                <select class="form-select"
+                        @bind="request.CustomerId">
+
+                    <option value="">Select Customer</option>
+
+                    @foreach (var customer in customers)
+                    {
+                        <option value="@customer.Id">
+
+                            @customer.FullName
+
+                        </option>
+                    }
+
+                </select>
+
+            </div>
+
+            <div class="col-md-6">
+
+                <label>Warehouse</label>
+
+                <select class="form-select"
+                        @bind="request.WarehouseId">
+
+                    <option value="">Select Warehouse</option>
+
+                    @foreach (var warehouse in warehouses)
+                    {
+                        <option value="@warehouse.Id">
+
+                            @warehouse.Name
+
+                        </option>
+                    }
+
+                </select>
+
+            </div>
+
+        </div>
+
+        <hr/>
+
+        <h5>Add Product</h5>
+
+        <div class="row">
+
+            <div class="col-md-4">
+
+                <label>Product</label>
+
+<InputSelect class="form-select"
+             @bind-Value="selectedProductId">
+
+    <option value="@Guid.Empty">
+        Select Product
+    </option>
+
+    @foreach (var product in products)
+    {
+        <option value="@product.Id">
+            @product.Name
+        </option>
+    }
+
+</InputSelect>
+
+            </div>
+<p>@selectedProductId</p>
+            <div class="col-md-3">
+
+                <label>Quantity</label>
+
+                <InputNumber class="form-control"
+                             @bind-Value="quantity" />
+
+            </div>
+
+            <div class="col-md-3">
+
+                <label>Price</label>
+
+                <InputNumber class="form-control"
+                             @bind-Value="unitPrice" />
+
+            </div>
+
+            <div class="col-md-2 d-flex align-items-end">
+
+            <button class="btn btn-primary w-100"
+            @onclick="AddItem"
+            type="button">
+
+            Add
+
+            </button>
+            <p>@orderItems.Count</p>
+
+            </div>
+
+        </div>
+
+    </div>
+<hr />
+
+<h5>Order Items</h5>
+
+<table class="table table-bordered">
+
+    <thead>
+
+        <tr>
+
+            <th>Product</th>
+
+            <th>Qty</th>
+
+            <th>Price</th>
+
+            <th>Total</th>
+
+            <th></th>
+
+        </tr>
+
+    </thead>
+
+    <tbody>
+
+        @foreach (var item in orderItems)
+        {
+            var product = products.FirstOrDefault(x => x.Id == item.ProductId);
+
+            <tr>
+
+                <td>@product?.Name</td>
+
+                <td>@item.Quantity</td>
+
+                <td>@item.UnitPrice</td>
+
+                <td>@(item.Quantity * item.UnitPrice)</td>
+
+                <td>
+
+                    <button class="btn btn-danger btn-sm"
+                            @onclick="() => RemoveItem(item)"
+                            type="button">
+
+                        Remove
+
+                    </button>
+
+                </td>
+
+            </tr>
+        }
+
+    </tbody>
+
+</table>
+<p>Items Count: @orderItems.Count</p>
+<button class="btn btn-success"
+        @onclick="Save">
+
+    Save Order
+
+</button>
+<h4 class="text-end">
+
+    Total :
+
+    @orderItems.Sum(x => x.Quantity * x.UnitPrice)
+
+</h4>
+</div>
+@code {
+
+    private CreateSalesOrderRequest request = new();
+
+    private List<CustomerDto> customers = new();
+
+    private List<WarehouseDto> warehouses = new();
+
+    private List<ProductDto> products = new();
+    private List<CreateSalesOrderItemRequest> orderItems = new();
+
+    private Guid selectedProductId;
+
+    private int quantity = 1;
+
+    private decimal unitPrice;
+
+    protected override async Task OnInitializedAsync()
+    {
+        customers =
+            (await CustomerService.GetCustomersAsync()).Items;
+
+        warehouses =
+            (await WarehouseService.GetWarehousesAsync()).Items;
+
+        products =
+            (await ProductService.GetProductsAsync()).Items;
+    }
+private void AddItem()
+{
+    Console.WriteLine("ADD");
+
+    orderItems.Add(new CreateSalesOrderItemRequest
+    {
+        ProductId = selectedProductId,
+        Quantity = quantity,
+        UnitPrice = unitPrice
+    });
+
+    Console.WriteLine(orderItems.Count);
+}
+private void RemoveItem(CreateSalesOrderItemRequest item)
+{
+    orderItems.Remove(item);
+}
+private async Task Save()
+{
+    request.Items = orderItems;
+
+    await SalesOrderService.CreateAsync(request);
+
+    Navigation.NavigateTo("/products");
+}
+}
