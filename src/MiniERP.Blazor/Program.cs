@@ -1,5 +1,6 @@
 
 using MiniERP.Blazor.Components;
+using MiniERP.Blazor.Extensions;
 using MiniERP.Blazor.Services;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -9,29 +10,7 @@ builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
 
 builder.Services.AddScoped<DashboardService>();
-
-builder.Services.AddHttpClient<DashboardService>(client =>
-{
-    client.BaseAddress = new Uri("http://localhost:5172/");
-});
-builder.Services.AddScoped<ChartService>();
-builder.Services.AddHttpClient<ProductService>(client =>
-{
-    client.BaseAddress = new Uri("http://localhost:5172/");
-});
-builder.Services.AddHttpClient<CustomerService>(client =>
-{
-    client.BaseAddress = new Uri("http://localhost:5172/");
-});
-builder.Services.AddHttpClient<WarehouseService>(client =>
-{
-    client.BaseAddress = new Uri("http://localhost:5172/");
-});
-
-builder.Services.AddHttpClient<SalesOrderService>(client =>
-{
-    client.BaseAddress = new Uri("http://localhost:5172/");
-});
+builder.Services.AddApplicationServices();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

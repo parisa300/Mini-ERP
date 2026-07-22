@@ -2,10 +2,10 @@ using MiniERP.Blazor.Models;
 
 namespace MiniERP.Blazor.Services;
 
-public class ChartService
+public class ChartMapper
 {
     public List<ChartPoint> ConvertMonthlySales(
-        List<MonthlySalesDto> sales)
+        IEnumerable<MonthlySalesDto> sales)
     {
         return sales
             .OrderBy(x => x.Year)

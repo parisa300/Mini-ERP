@@ -1,20 +1,24 @@
-using System.Net.Http.Json;
 using MiniERP.Blazor.Models;
+
 
 namespace MiniERP.Blazor.Services;
 
-public class WarehouseService
+public class WarehouseService : BaseApiService
 {
-    private readonly HttpClient _http;
-
     public WarehouseService(HttpClient http)
+        : base(http)
     {
-        _http = http;
     }
 
-    public async Task<PagedResult<WarehouseDto>> GetWarehousesAsync()
+    public async Task<PagedResult<WarehouseDto>> GetWarehousesAsync(
+        int page = 1,
+        int pageSize = 10,
+        string? search = null)
     {
-        return await _http.GetFromJsonAsync<PagedResult<WarehouseDto>>(
-            "warehouses") ?? new();
+        return await GetAsync<PagedResult<WarehouseDto>>
+        (
+            $"warehouses?page={page}&pageSize={pageSize}&search={search}"
+        )
+        ?? new();
     }
 }
